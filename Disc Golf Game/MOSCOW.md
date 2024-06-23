@@ -33,6 +33,7 @@ kanban-plugin: board
 - [ ] Ground play
 - [ ] Shadow that shows the user the height of the disc
 - [ ] Bushes
+- [ ] Wind
 
 
 ## Won't Have

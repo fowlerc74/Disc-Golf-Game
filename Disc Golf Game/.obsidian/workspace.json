@@ -51,11 +51,19 @@
             "id": "7b6af6c8d97850c3",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "kanban",
               "state": {
-                "file": "Ideas for controls.md",
-                "mode": "source",
-                "source": false
+                "file": "MOSCOW.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": [
+                    false,
+                    false,
+                    false,
+                    false,
+                    false
+                  ]
+                }
               }
             }
           }
@@ -126,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ideas for controls.md",
+                "file": "MOSCOW.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -143,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ideas for controls.md",
+                "file": "MOSCOW.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -166,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ideas for controls.md"
+                "file": "MOSCOW.md"
               }
             }
           }
@@ -190,9 +198,9 @@
   },
   "active": "7b6af6c8d97850c3",
   "lastOpenFiles": [
-    "MOSCOW.md",
-    "Ideas for controls.md",
     "Board.md",
+    "Ideas for controls.md",
+    "MOSCOW.md",
     "MoSCoW.md",
     "Untitled",
     "Welcome.md"

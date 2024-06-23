@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://co5lcb7p75dme"]
+[gd_scene load_steps=6 format=3 uid="uid://co5lcb7p75dme"]
 
-[ext_resource type="Script" path="res://Scenes/DiscFlight.gd" id="1_gyosw"]
+[ext_resource type="Script" path="res://Scripts/DiscFlight.gd" id="1_gyosw"]
+[ext_resource type="Texture2D" uid="uid://rs4ci7mblca5" path="res://Art/disc_shadow.png" id="2_3icko"]
 [ext_resource type="Texture2D" uid="uid://b76uhm3grv6vh" path="res://Art/disc_art_1.png" id="2_66ka5"]
+[ext_resource type="Script" path="res://Scripts/Disc Sprite.gd" id="3_nibwb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iakph"]
 radius = 7.0
@@ -10,8 +12,13 @@ height = 16.0
 [node name="Disc" type="RigidBody2D"]
 script = ExtResource("1_gyosw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Disc Sprite" type="Sprite2D" parent="."]
+z_index = 1
 texture = ExtResource("2_66ka5")
+script = ExtResource("3_nibwb")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+texture = ExtResource("2_3icko")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
