@@ -30,12 +30,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var current_fric_coef = AIR_FRICTION_COEF * linear_velocity.length() + MIN_AIR_FRICTION
-	linear_velocity *= (1 - current_fric_coef * delta) 
+	var current_fric_coef = AIR_FRICTION_COEF * linear_velocity.length() / 100 + MIN_AIR_FRICTION
+	linear_velocity *= (1 - current_fric_coef) 
 	
 	if not grounded:
 		vertical_velocity = vertical_velocity - GLIDE_RESISTANCE
-		height += vertical_velocity * delta
+		height += vertical_velocity
 	
 	if height <= 0:
 		if linear_velocity.length() > MIN_SKIP_SPEED:
