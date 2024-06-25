@@ -1,9 +1,11 @@
 extends RigidBody2D
 
-@export var MIN_AIR_FRIC_COEF: float = 0.06
-@export var MAX_AIR_FRIC_COEF: float = 0.10
-@export var MAX_SPEED: float = 1150
-@export var MIN_SPEED: float = 1000
+# To make less exponential, min/max air closer together, min/max speed further apart
+
+@export var MIN_AIR_FRIC_COEF: float = 0.07
+@export var MAX_AIR_FRIC_COEF: float = 0.07
+@export var MAX_SPEED: float = 1350
+@export var MIN_SPEED: float = 700
 @export var GLIDE_COEF: float = 8
 @export var GRAVITY: float = 35
 @export var STARTING_HEIGHT: float = 6.0
