@@ -11,4 +11,5 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	offset.y = -1 * DISC_HEIGHT_COEF * get_parent().height
+	rotation = -1 * get_parent().disc_angle
 	

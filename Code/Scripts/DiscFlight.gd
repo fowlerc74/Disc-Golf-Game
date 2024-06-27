@@ -9,24 +9,30 @@ extends RigidBody2D
 @export var GLIDE_COEF: float = 8
 @export var GRAVITY: float = 35
 @export var STARTING_HEIGHT: float = 6.0
+@export var TURN_COEF: float = .06
+@export var FADE_COEF: float = .18
+@export var FADE_SPEED: float = 1
+@export var FADE_OFFSET: float = 0
 @export var SKIP_VERTICAL_SPEED_COEF: float = 0.7
 @export var MAX_SKIP_SPEED_COEF: float = .75
 @export var MIN_SKIP_SPEED_COEF: float = .4
 @export var MIN_SKIP_SPEED: int = 10
 
-@export var speed: int = 13
+@export var speed: int = 12
 @export var glide: int = 5
-@export var turn: int = -1
-@export var fade: int = 3
+@export var turn: int = -2
+@export var fade: int = 2
 
 var height = 0
 var vertical_velocity = 0
+var disc_angle = 0
+var angle_velocity = 0
 var grounded = true
 var max_h = 0
 var skip_speed_coef = (speed / 14.5) * (MAX_SKIP_SPEED_COEF - MIN_SKIP_SPEED_COEF) + MIN_SKIP_SPEED_COEF
 var throw_ready = false
-var max_speed = 0
-var neg = 1 #REMOVE TODO
+var max_speed = ((speed / 14.5) * (MAX_SPEED - MIN_SPEED) + MIN_SPEED)
+var starting_position = Vector2(0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,6 +48,16 @@ func _process(delta):
 		vertical_velocity += GLIDE_COEF * glide * ratio_to_top_speed * delta
 		vertical_velocity -= GRAVITY * delta
 		height += vertical_velocity * delta
+	
+		var current_speed = linear_velocity.length()
+		#var angle = acos(linear_velocity.x/linear_velocity.length())
+		var turn = turn * TURN_COEF * (speed / 14.5) * (current_speed / max_speed) * delta
+		var fade = max(fade * FADE_COEF * (speed / 14.5) * (max_speed - current_speed) / max_speed - FADE_OFFSET, 0) * delta
+		angle_velocity = turn + fade
+		disc_angle = (angle_velocity + disc_angle) 
+		print(disc_angle, " ", turn, " ", fade, " ", angle_velocity)
+		
+		
 		
 		#print(linear_velocity.length(), " ", vertical_velocity, " ", height)
 	
@@ -49,6 +65,7 @@ func _process(delta):
 		if linear_velocity.length() > MIN_SKIP_SPEED:
 			linear_velocity *= skip_speed_coef
 			vertical_velocity = abs((speed / 14.5) * vertical_velocity * SKIP_VERTICAL_SPEED_COEF) 
+			
 		else:
 			grounded = true
 			height = 0
@@ -62,17 +79,17 @@ func _process(delta):
 		throw_ready = true
 		print("----------------------")
 		print("Disc Speed: ", speed)
-		print("Final Distance: ", position.x / 16, " feet")
+		print("Final Distance: ", position.distance_to(starting_position) / 16, " feet")
 		print("----------------------")
-		
-		#neg *= -1
-		#speed -= 4
 
 func throw():
+	starting_position = position
 	#var throw_direction = (get_global_mouse_position() - position).normalized()
-	var throw_direction = Vector2(neg * 1,0)
-	linear_velocity = throw_direction * ((speed / 14.5) * (MAX_SPEED - MIN_SPEED) + MIN_SPEED)
-	max_speed = linear_velocity.length()
+	var throw_direction = Vector2(0,-1).normalized()
+	linear_velocity = throw_direction * max_speed
 	height = STARTING_HEIGHT
 	grounded = false
 	throw_ready = false
+	
+func rad_to_deg(rad):
+	return rad / TAU * 360
